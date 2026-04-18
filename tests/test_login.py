@@ -6,11 +6,13 @@ config = ConfigReader()
 print(f"config sections {config.config.sections()}")
 print(f"config sections {config.config.items()}")
 
-username = config.get_value_from_config("username")
-password = config.get_value_from_config("password")
+
 
 
 def test_login_functionality(my_page):
+    username = config.get_value_from_config("username")
+    password = config.get_value_from_config("password")
+
     print(f"Page Title: {my_page.title()}")
     login_page = LoginPage(my_page)
     print(f"UserName : {username}, Password: {password}")
@@ -22,6 +24,8 @@ def test_login_functionality(my_page):
 
 
 def test_incorrect_login_test(my_page):
+    # username = config.get_value_from_config("username")
+    password = config.get_value_from_config("password")
     print(f"Page Title: {my_page.title()}")
     login_page = LoginPage(my_page)
     login_page.perform_login("locked_out_user", password)
