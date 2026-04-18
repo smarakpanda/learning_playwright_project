@@ -3,6 +3,9 @@ from utils.configReader import ConfigReader
 
 config = ConfigReader()
 
+print(f"config sections {config.config.sections()}")
+print(f"config sections {config.config.items()}")
+
 username = config.get_value_from_config("username")
 password = config.get_value_from_config("password")
 
