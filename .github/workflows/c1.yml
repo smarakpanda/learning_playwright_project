@@ -1,24 +1,27 @@
-name: Run Python Project
+name: Run Tests
 
-on:
-  push:
-    branches: [ "main" ]
+on: [push]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: 3.11
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install playwright
 
-      - name: Run code
+      - name: Install Playwright Browsers
+        run: playwright install --with-deps
+
+      - name: Run tests
         run: pytest -v
