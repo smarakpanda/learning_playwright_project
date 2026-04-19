@@ -13,4 +13,14 @@ class ConfigReader:
         print("Reading config from:", config_path)
         print("Exists?", os.path.exists(config_path))
 
-        self.config.read(config_path)
+        files_read = self.config.read(config_path)
+
+        if not files_read:
+            raise FileNotFoundError(f"Config file not found at {config_path}")
+
+    @log_decorator
+    def get_value_from_config(self, key, section="DEFAULT"):
+        try:
+            return self.config[section][key]
+        except KeyError:
+            raise Exception(f"Missing '{key}' in section '{section}' of config.ini")
