@@ -1,5 +1,7 @@
 import os
 import configparser
+from utils.decorators.LoggingDecorator import log_decorator
+
 
 class ConfigReader:
 
